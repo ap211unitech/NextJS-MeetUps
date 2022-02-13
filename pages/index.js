@@ -1,9 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import MeetUpList from '../components/meetups/MeetupList';
 
-const HoemePage = () => {
+const dummy = [
+  {
+    id: '1',
+    title: 'A first meetup',
+    image: 'https://thumbs.dreamstime.com/b/random-building-asheville-north-carolina-usa-taken-december-65696557.jpg',
+    address: '108, Achalda, Auraiya',
+    description: 'This is first meetup!'
+  }
+]
+
+const HomePage = () => {
+
+  const [meetUps, setMeetUps] = useState([]);
+  useEffect(() => {
+    setMeetUps(dummy);
+  }, [])
+
   return (
-    <div>Home Page</div>
+    <MeetUpList meetups={meetUps} />
   )
 }
 
-export default HoemePage
+export default HomePage
