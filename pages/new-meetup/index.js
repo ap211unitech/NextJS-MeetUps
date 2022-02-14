@@ -3,7 +3,7 @@ import NewMeetUpForm from '../../components/meetups/NewMeetupForm';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 
-const index = () => {
+const Index = () => {
 
     const router = useRouter();
 
@@ -40,4 +40,4 @@ const index = () => {
     )
 }
 
-export default index
+export default Index
