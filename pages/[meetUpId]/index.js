@@ -1,15 +1,24 @@
-import React from 'react';
+import { Fragment } from 'react';
 import MeetUpDetail from '../../components/meetups/MeetUpDetail';
-
+import Head from 'next/head';
 
 const MeetUpDetails = ({ meetUpData: { image, id, title, address, description } }) => {
     return (
-        <MeetUpDetail
-            image={image}
-            title={title}
-            address={address}
-            description={description}
-        />
+        <Fragment>
+            <Head>
+                <title>{title}</title>
+                <meta
+                    name="description"
+                    content={description}
+                />
+            </Head>
+            <MeetUpDetail
+                image={image}
+                title={title}
+                address={address}
+                description={description}
+            />
+        </Fragment>
     )
 }
 

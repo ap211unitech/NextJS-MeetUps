@@ -1,8 +1,19 @@
 import MeetUpList from '../components/meetups/MeetupList';
+import Head from 'next/head';
+import { Fragment } from 'react';
 
 const HomePage = (props) => {
   return (
-    <MeetUpList meetups={props.meetUps} />
+    <Fragment>
+      <Head>
+        <title>NextJS MeetUps</title>
+        <meta
+          name="description"
+          content="Browse a huge list of highly active React meetups!"
+        />
+      </Head>
+      <MeetUpList meetups={props.meetUps} />
+    </Fragment>
   )
 }
 

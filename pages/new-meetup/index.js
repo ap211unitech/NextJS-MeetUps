@@ -1,6 +1,7 @@
-import React from 'react'
+import { Fragment } from 'react'
 import NewMeetUpForm from '../../components/meetups/NewMeetupForm';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 const index = () => {
 
@@ -26,7 +27,16 @@ const index = () => {
     }
 
     return (
-        <NewMeetUpForm onAddMeetup={onAddMeetup} />
+        <Fragment>
+            <Head>
+                <title>Add a new MeetUp</title>
+                <meta
+                    name="description"
+                    content="Add your own MeetUps and create amazing networking opportunities."
+                />
+            </Head>
+            <NewMeetUpForm onAddMeetup={onAddMeetup} />
+        </Fragment>
     )
 }
 
