@@ -2,6 +2,7 @@ import { Fragment } from 'react'
 import NewMeetUpForm from '../../components/meetups/NewMeetupForm';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import { server } from '../../config/index';
 
 const Index = () => {
 
@@ -9,7 +10,7 @@ const Index = () => {
 
     const onAddMeetup = async (enteredMeetUpData) => {
         try {
-            const res = await fetch('/api/meetup', {
+            const res = await fetch(`${server}/api/meetup`, {
                 method: 'POST',
                 body: JSON.stringify(enteredMeetUpData),
                 headers: {

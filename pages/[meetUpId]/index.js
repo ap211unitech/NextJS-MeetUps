@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import MeetUpDetail from '../../components/meetups/MeetUpDetail';
 import Head from 'next/head';
+import { server } from '../../config/index';
 
 const MeetUpDetails = ({ meetUpData: { image, id, title, address, description } }) => {
     return (
@@ -24,7 +25,7 @@ const MeetUpDetails = ({ meetUpData: { image, id, title, address, description } 
 
 export async function getStaticPaths() {
 
-    const res = await fetch('http://localhost:3000/api/meetup', {
+    const res = await fetch(`${server}/api/meetup`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'

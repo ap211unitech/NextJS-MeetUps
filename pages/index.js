@@ -1,6 +1,7 @@
 import MeetUpList from '../components/meetups/MeetupList';
 import Head from 'next/head';
 import { Fragment } from 'react';
+import { server } from '../config/index';
 
 const HomePage = (props) => {
   return (
@@ -28,7 +29,7 @@ const HomePage = (props) => {
 
 const fetchAllMeetUps = async () => {
   try {
-    const res = await fetch('http://localhost:3000/api/meetup', {
+    const res = await fetch(`${server}/api/meetup`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -38,6 +39,7 @@ const fetchAllMeetUps = async () => {
     return data.data;
   }
   catch (e) {
+    console.log(e)
     return [];
   }
 }
