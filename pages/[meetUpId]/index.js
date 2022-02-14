@@ -14,28 +14,40 @@ const MeetUpDetails = ({ meetUpData: { image, id, title, address, description } 
 }
 
 export async function getStaticPaths() {
+
+    const res = await fetch('http://localhost:3000/api/meetup', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    const data = await res.json();
+
     return {
         fallback: false,
-        paths: [
-            {
-                params: {
-                    meetUpId: '1'
-                }
-            }
-        ]
+        paths: data.data.map(meetup => ({ params: { meetUpId: meetup._id.toString() } }))
     }
 }
 
 export async function getStaticProps(context) {
     const meetUpId = context.params.meetUpId;
+    const res = await fetch(`http://localhost:3000/api/meetupbyid`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: meetUpId })
+    });
+    const data = await res.json();
+
     return {
         props: {
             meetUpData: {
-                image: 'https://thumbs.dreamstime.com/b/random-building-asheville-north-carolina-usa-taken-december-65696557.jpg',
-                id: meetUpId,
-                title: 'A First Meetup',
-                address: '108, Achalda, Auraiya',
-                description: 'This is first meetup!'
+                image: data.image,
+                id: data._id,
+                title: data.title,
+                address: data.address,
+                description: data.description
             }
         }
     }

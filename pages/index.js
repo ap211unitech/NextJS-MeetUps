@@ -1,15 +1,5 @@
 import MeetUpList from '../components/meetups/MeetupList';
 
-const dummy = [
-  {
-    id: '1',
-    title: 'A first meetup',
-    image: 'https://thumbs.dreamstime.com/b/random-building-asheville-north-carolina-usa-taken-december-65696557.jpg',
-    address: '108, Achalda, Auraiya',
-    description: 'This is first meetup!'
-  }
-]
-
 const HomePage = (props) => {
   return (
     <MeetUpList meetups={props.meetUps} />
@@ -25,14 +15,31 @@ const HomePage = (props) => {
 //   }
 // }
 
+const fetchAllMeetUps = async () => {
+  try {
+    const res = await fetch('http://localhost:3000/api/meetup', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    const data = await res.json();
+    return data.data;
+  }
+  catch (e) {
+    return [];
+  }
+}
+
 export async function getStaticProps() {
   // Fetch Data from API
   return {
     props: {
-      meetUps: dummy
+      meetUps: await fetchAllMeetUps()
     },
     revalidate: 1
   }
+
 }
 
 export default HomePage
